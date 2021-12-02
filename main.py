@@ -2,6 +2,8 @@ import os
 import discord
 import random
 
+print('Está vivo!!!')
+
 client = discord.Client()
 
 @client.event
