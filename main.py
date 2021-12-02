@@ -25,7 +25,7 @@ async def on_message(message):
   if message.content.startswith('$image'):
     await message.channel.send(f'image: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkozfDxmnmovg2tDYpHHC3JG9ttFBZCGNoP-F71Efwp_JVmlVmtQH5NdyE_aULWtEG-DM&usqp=CAU')
 
-
+ 
 senha_do_bot = os.environ['TOKEN']
 
 client.run(senha_do_bot)
