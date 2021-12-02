@@ -29,7 +29,7 @@ async def on_message(message):
     
     else:
       await message.channel.send('Digite um um dado entre as opções: \n\nd2  - dado de 2  lados \nd4  - dado de 4  lados \nd6  - dado de 6  lados \nd8  - dado de 8  lados \nd10 - dado de 10 lados \nd12 - dado de 12 lados \nd20 - dado de 20 lados')
-
+  
   
   if msg.startswith('$video'):
     await message.channel.send(f'Video: https://www.youtube.com/watch?v=SPTfmiYiuok')
