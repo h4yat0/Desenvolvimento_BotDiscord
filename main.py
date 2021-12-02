@@ -22,6 +22,7 @@ async def on_message(message):
   # ===================== Comandos de Help ============================
   if msg.startswith('.help'):
     await message.channel.send(f':bookmark_tabs: Veja os comandos abaixo :bookmark_tabs: \n\n')
+    await message.channel.send(f'‎‎')
     await message.channel.send(f':small_blue_diamond: .Dados + (d2, d4, d6, d8, d10, d12, d20)')
     await message.channel.send(f':small_blue_diamond: .video')
     await message.channel.send(f':small_blue_diamond: .image')
