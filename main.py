@@ -3,6 +3,9 @@ import discord
 from discord.ext import commands
 import random
 
+# -> Prefixo Definido
+bot = commands.Bot(command_prefix='.')
+
 client = discord.Client()
 
 @client.event
@@ -16,11 +19,13 @@ async def on_message(message):
     return
 
   # ===================== Comandos de Help ============================
-  if msg.startswith('$help'):
-    await message.channel.send(f'$Dados + (d2, d4, d6, d8, d10, d12, d20)')
-    await message.channel.send(f'$video')
-    await message.channel.send(f'$image')
+  if msg.startswith('.help'):
+    await message.channel.send(f'◈ .Dados + (d2, d4, d6, d8, d10, d12, d20)')
+    await message.channel.send(f'◈ .video')
+    await message.channel.send(f'◈ .image')
+    await message.channel.send(f'◈ .classe')
 
+    
   # ===================== Comandos de Dado ============================
   if msg.startswith('.dado'):
     dices = ['d2', 'd4', 'd6', 'd8', 'd10', 'd12', 'd20']
