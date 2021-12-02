@@ -15,6 +15,13 @@ async def on_message(message):
   if message.author == client.user:
     return
 
+  # ===================== Comandos de Help ============================
+  if msg.startswith('$help'):
+    await message.channel.send(f'$Dados + (d2, d4, d6, d8, d10, d12, d20)')
+    await message.channel.send(f'$video')
+    await message.channel.send(f'$image')
+
+  # ===================== Comandos de Dado ============================
   if msg.startswith('.dado'):
     dices = ['d2', 'd4', 'd6', 'd8', 'd10', 'd12', 'd20']
     dice = msg.split('.dado ', 1)[1]
@@ -27,6 +34,7 @@ async def on_message(message):
     else:
       await message.channel.send('Digite um um dado entre as opções: \n\nd2  - dado de 2  lados \nd4  - dado de 4  lados \nd6  - dado de 6  lados \nd8  - dado de 8  lados \nd10 - dado de 10 lados \nd12 - dado de 12 lados \nd20 - dado de 20 lados')
   
+  # ===================== Comandos de imagem ou vídeo ============================
   
   if msg.startswith('$video'):
     await message.channel.send(f'Video: https://www.youtube.com/watch?v=SPTfmiYiuok')
