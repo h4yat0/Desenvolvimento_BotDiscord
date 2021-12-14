@@ -1,6 +1,7 @@
 import os
 import discord
 from discord.ext import commands
+from boto.s3.connection import S3Connection
 import random
 
 # -> Prefixo Definido
@@ -57,6 +58,8 @@ async def on_message(message):
     await message.channel.send(f'image: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkozfDxmnmovg2tDYpHHC3JG9ttFBZCGNoP-F71Efwp_JVmlVmtQH5NdyE_aULWtEG-DM&usqp=CAU')
 
 
-senha_do_bot = os.environ['TOKEN']
+senha_do_bot = S3Connection(os.environ['TOKEN'])
 
 client.run(senha_do_bot)
+
+
