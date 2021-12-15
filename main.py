@@ -21,6 +21,13 @@ async def on_message(message):
     if message.author == client.user:
         return
 
+    # -> Mensagens repetitivas
+    def dados():
+        tipos_dados = 'Digite um um dado entre as opções: \n\nd2  - dado de 2  lados \nd4  - dado de 4  lados\nd6  - ' \
+                      'dado de 6  lados\nd8  - dado de 8  lados\nd10 - dado de 10 lados\nd12 - dado de 12 lados\nd20 ' \
+                      '- dado de 20 lados '
+        await message.channel.send(tipos_dados)
+
     # ===================== Comandos de Help ============================
     if msg.startswith('.help'):
         await message.channel.send(f':bookmark_tabs: Veja os comandos abaixo :bookmark_tabs: \n\n')
@@ -31,7 +38,6 @@ async def on_message(message):
         await message.channel.send(f':small_blue_diamond: .classe')
 
     # ===================== Comandos de Dado ============================
-
     if msg.startswith('.dado'):
         dices = ['d2', 'd4', 'd6', 'd8', 'd10', 'd12', 'd20']
         dice = msg.split('.dado', 1)[1]
@@ -41,11 +47,11 @@ async def on_message(message):
             dice = int(dice.replace('d', ''))
             await message.channel.send(f'Seu resultado: {random.randint(1, dice)}')
 
+        if dice.isspace():
+            dados()
+
         else:
-            await message.channel.send(
-                'Digite um um dado entre as opções: \n\nd2  - dado de 2  lados \nd4  - dado de 4  lados\nd6  - dado '
-                'de 6  lados\nd8  - dado de 8  lados\nd10 - dado de 10 lados\nd12 - dado de 12 lados\nd20 - dado de '
-                '20 lados')
+            dados()
 
     # ===================== Comandos Classes ============================
 
