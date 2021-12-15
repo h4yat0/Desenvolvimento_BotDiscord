@@ -34,7 +34,7 @@ async def on_message(message):
 
     if msg.startswith('.dado'):
         dices = ['d2', 'd4', 'd6', 'd8', 'd10', 'd12', 'd20']
-        dice = msg.split('.dado ', 1)[1]
+        dice = msg.split('.dado', 1)[1]
 
         if dice in dices:
             dice = dice.lower()
