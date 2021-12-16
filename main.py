@@ -77,11 +77,9 @@ async def send_help(ctx):
                           ⋙ .video"""
                           )
 
-<<<<<<< HEAD
+
     await ctx.channel.send(frame_embed)
-=======
-    await ctx.channel.send(embed=frame_embed)
->>>>>>> 16073a82709b803ac95cb7f3a302fc12a03a08f4
+
 
     # await ctx.channel.send(f':books:  Lista de Comandos :books:  \n\n')
     # await ctx.channel.send(f'')
