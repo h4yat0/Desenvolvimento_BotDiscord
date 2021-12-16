@@ -38,9 +38,9 @@ async def on_ready():
 
 client.remove_command("help")
 
-
 @client.command(name="help")
 async def send_help(ctx):
+    await ctx.channel.send("teste")
     frame_embed = discord.Embed(
         title=":books:  Lista de Comandos :books:",
         description="Segue abaixo todos os comandos e suas variações !",
