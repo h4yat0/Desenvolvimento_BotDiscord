@@ -1,80 +1,111 @@
-import discord
-from discord import message
-from discord.ext import commands, tasks
-from os import environ
 import random
-import requests
-import datetime
-import json
-import aiohttp
+from os import environ
+import discord
+import psycopg2
+from discord import message
+from discord.ext import commands  # , tasks
 
+# import requests
+# import datetime
+# import json
+# import aiohttp
+
+# # -> Conexão com banco de dados
+# conexao_banco_de_dados = psycopg2.connect(
+#     host=environ.get('DB_HOST'),
+#     dbname=environ.get('DB_NAME'),
+#     user=environ.get('DB_USER'),
+#     password=environ.get('DB_PASSWORD'))
+#
+# cur = conexao_banco_de_dados.cursor()
+# cur.execute("SELECT * FROM players;")
+# print(cur.fetchall())
+# conexao_banco_de_dados.commit()
+# cur.close()
 
 # -> Prefixo Definido
-bot = commands.Bot(command_prefix='.')
+client = commands.Bot(command_prefix='.')
 
-client = discord.Client()
 
 @client.event
 async def on_ready():
     print('Estou logado como {0.user}'.format(client))
 
 
-@client.event
-async def on_message(message):
-    msg = message.content
-    if message.author == client.user:
-        return
+@client.command()
+async def ping(ctx):
+    await ctx.send('Pong')
+
+
+# @client.event
+# async def on_message(message):
+#     msg = message.content
+#     if message.author == client.user:
+#         return
+
 
 # ===================== Comandos de Help ===============================================================
-    
-@bot.command(name = "help")
-async def send_help(ctx):
-    await ctx.channel.send(f':bookmark_tabs: Veja os comandos abaixo :bookmark_tabs: \n\n')
-    await ctx.channel.send(f'‎‎')
-    await ctx.channel.send(f' .dado + (d2, d4, d6, d8, d10, d12, d20)')
-    await ctx.channel.send(f' .video')
-    await ctx.channel.send(f' .image')
-    await ctx.channel.send(f' .classe')      
+
+@client.command(aliases=['helpe'])
+async def helpme(ctx):
+    await ctx.channel.send(':bookmark_tabs: Veja os comandos abaixo \n\n')
+    await ctx.channel.send('‎‎')
+    await ctx.channel.send('.dado + (d2, d4, d6, d8, d10, d12, d20)\n'
+                           '.video\n'
+                           '.image\n'
+                           '.classes\n'
+                           '    ')
+
 
 # ===================== Comandos de Dado ===============================================================
-    
-@bot.command(name = "help")
-async def dado(ctx):
-    
-        dices = [' d2', ' d4', ' d6', ' d8', ' d10', ' d12', ' d20']
-        dice = ctx.split('.dado', 1)[1]
 
-        tipos_dados = 'Digite um um dado entre as opções: \n\nd2  - dado de 2  lados \nd4  - dado de 4  lados\nd6  - ' \
-                      'dado de 6  lados\nd8  - dado de 8  lados\nd10 - dado de 10 lados\nd12 - dado de 12 lados\nd20 ' \
-                      '- dado de 20 lados '
+@client.command()
+async def dado(ctx, *dados):
+    username = ctx.message.author.mention
 
-        if dice in dices:
-            dice = dice.lower()
-            dice = int(dice.replace('d', ''))
-            await ctx.channel.send(f'Seu resultado: {random.randint(1, dice)}')
-        elif dice.strip() == '':
-            await ctx.channel.send(tipos_dados)
+    for _dados in dados:
+        dice_location = _dados.find('d')
+        if dice_location == 0:
+            await ctx.channel.send(f'{username} {_dados} --> {random.randint(1, int(_dados[dice_location + 1:]))}')
+        elif _dados != 0:
+            number_of_repetitions = int(_dados[:dice_location])
+            final_value = 0
+            summation = '['
+
+            for i in range(number_of_repetitions):
+                roll = random.randint(1, int(_dados[dice_location + 1:]))
+                final_value += roll
+                summation = summation + str(roll) + '+'
+            await ctx.channel.send(f'{username} {_dados} {summation[:-1]}] --> {final_value}')
+
+        # Erros não foram devidamente tratados
+
         else:
-            await ctx.channel.send(tipos_dados)
+            await ctx.channel.send(f'{username} Dado não idêntificado!')
+
 
 # ===================== Comandos Classes ================================================================
 
-@bot.command(name ="classe")
-async def class_change(ctx):
+@client.command()
+async def classes(ctx):
     await ctx.channel.send(
         'Escolha uma classe: \n\nGuerreiro\nFeiticeiro\nLadino\nBarbáro\nBardo\nBruxo\nClérigo\nDruida\nMago'
         '\nMonge\nPaladino')
 
+
 # ===================== Comandos de imagem ou vídeo ====================================================
 
-@bot.command(name ="video")
+@client.command()
 async def send_video(ctx):
-    await message.channel.send(f'Video: https://www.youtube.com/watch?v=SPTfmiYiuok')
+    await ctx.channel.send(f'Video: https://www.youtube.com/watch?v=SPTfmiYiuok')
 
-@bot.command(name ="imagem")
+
+@client.command()
 async def send_image(ctx):
-        await message.channel.send(
-        f'image: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkozfDxmnmovg2tDYpHHC3JG9ttFBZCGNoP-F71Efwp_JVmlVmtQH5NdyE_aULWtEG-DM&usqp=CAU')
+    await ctx.channel.send(
+        f'image: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkozfDxmnmovg2tDYpHHC3JG9ttFBZCGNoP'
+        f'-F71Efwp_JVmlVmtQH5NdyE_aULWtEG-DM&usqp=CAU')
+
 
 password = environ.get('TOKEN')
 
