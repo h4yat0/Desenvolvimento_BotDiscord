@@ -62,24 +62,21 @@ async def helpme(ctx):
 @client.command()
 async def dado(ctx, *dados):
     username = ctx.message.author.mention
-
     for _dados in dados:
         dice_location = _dados.find('d')
-        if dice_location == 0:
-            await ctx.channel.send(f'{username} {_dados} --> {random.randint(1, int(_dados[dice_location + 1:]))}')
-        elif _dados != 0:
-            number_of_repetitions = int(_dados[:dice_location])
-            final_value = 0
-            summation = '['
+        if dice_location != -1:
+            if dice_location == 0:
+                await ctx.channel.send(f'{username} {_dados} --> {random.randint(1, int(_dados[dice_location + 1:]))}')
+            if _dados[0].isnumeric() and _dados[0] != 0:
+                number_of_repetitions = int(_dados[:dice_location])
+                final_value = 0
+                summation = '['
 
-            for i in range(number_of_repetitions):
-                roll = random.randint(1, int(_dados[dice_location + 1:]))
-                final_value += roll
-                summation = summation + str(roll) + '+'
-            await ctx.channel.send(f'{username} {_dados} {summation[:-1]}] --> {final_value}')
-
-        # Erros não foram devidamente tratados
-
+                for i in range(number_of_repetitions):
+                    roll = random.randint(1, int(_dados[dice_location + 1:]))
+                    final_value += roll
+                    summation = summation + str(roll) + '+'
+                await ctx.channel.send(f'{username} {_dados} {summation[:-1]}] --> {final_value}')
         else:
             await ctx.channel.send(f'{username} Dado não idêntificado!')
 
