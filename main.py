@@ -3,7 +3,7 @@ from os import environ
 import discord
 import psycopg2
 from discord import message
-from discord.ext import commands  # , tasks
+from discord.ext import commands, embed  # , tasks
 
 # import requests
 # import datetime
@@ -43,31 +43,70 @@ async def on_ready():
 client.remove_command("help")
 @client.command(name="help")
 async def send_help(ctx):
-    await ctx.channel.send(f':books:  Lista de Comandos :books:  \n\n')
-    await ctx.channel.send(f'‎')
+    frame_embed = discord.Embed(
+        title = ":books:  Lista de Comandos :books:",
+        description = "Segue abaixo todos os comandos e suas variações !", 
+        color = 0xDC143C
+    )
+    frame_embed.set_author(name = client.user.name, icon_url=client.user.avatar_url)
+    frame_embed.set_footer(text = client.user.name, icon_url=client.user.avatar_url)
+    
+    frame_embed.set_imaget("")
 
-    await ctx.channel.send(f'🐲COMANDOS RPG🧙‍♂️')
-    await ctx.channel.send(f'⋙ .dado + (d2, d4, d6, d8, d10, d12, d20)')
-    await ctx.channel.send(f'''⋙ .classe + (Nome da Classe) 
-                            → Alquimista,
-                            → Antipaladino, 
-                            → Bárbaro, 
-                            → Bardo, 
-                            → Cavaleiro,
-                            → Clérigo,
-                            → Druida,
-                            → Feiticeiro,
-                            → Guerreiro,
-                            → Ladino,
-                            → Mago,
-                            → Monge,
-                            → Paladino,
-                            → Ranger e
-                            → Xamã''')
-    await ctx.channel.send(f'‎')
-    await ctx.channel.send(f'💎OUTROS COMANDOS💎')
-    await ctx.channel.send(f'⋙ .image')
-    await ctx.channel.send(f'⋙ .video')
+    frame_embed.add_field(name = "")
+    frame_embed.add_field(name = "🐲COMANDOS RPG🧙‍♂️", inline = False, value = """            
+                          ⋙ .dado + (d2, d4, d6, d8, d10, d12, d20) + (+valor para somar [Opicional])
+                          ⋙ .classe + (Nome das Classes abaixo)
+                          → Alquimista
+                          → Antipaladino
+                          → Bárbaro 
+                          → Bardo
+                          → Cavaleiro
+                          → Clérigo
+                          → Feiticeiro
+                          → Druida
+                          → Guerreiro
+                          → Ladino
+                          → Mago
+                          → Monge
+                          → Paladino
+                          → Ranger
+                          → Xamã"""
+    )
+
+    frame_embed.add_field(name = "💎OUTROS COMANDOS💎", inline = False, value = """            
+                          ⋙ .image
+                          ⋙ .video"""
+    )
+
+
+    # await ctx.channel.send(embed = frame_embed)
+
+    # await ctx.channel.send(f':books:  Lista de Comandos :books:  \n\n')
+    # await ctx.channel.send(f'')
+
+    # await ctx.channel.send(f'🐲COMANDOS RPG🧙‍♂️')
+    # await ctx.channel.send(f'⋙ .dado + (d2, d4, d6, d8, d10, d12, d20)')
+    # await ctx.channel.send(f'''⋙ .classe + (Nome da Classe) 
+    #                         → Alquimista,
+    #                         → Antipaladino, 
+    #                         → Bárbaro, 
+    #                         → Bardo, 
+    #                         → Cavaleiro,
+    #                         → Clérigo,
+    #                         → Druida,
+    #                         → Feiticeiro,
+    #                         → Guerreiro,
+    #                         → Ladino,
+    #                         → Mago,
+    #                         → Monge,
+    #                         → Paladino,
+    #                         → Ranger e
+    #                         → Xamã''')
+    # await ctx.channel.send(f'‎')
+    # await ctx.channel.send(f'')
+    # await ctx.channel.send(f'')
+    # await ctx.channel.send(f'')
 
 
 # ===================== Comandos de Dado ===============================================================
