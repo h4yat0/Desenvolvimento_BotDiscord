@@ -31,12 +31,6 @@ client = commands.Bot(command_prefix='.')
 async def on_ready():
     print('Estou logado como {0.user}'.format(client))
 
-
-@client.command()
-async def ping(ctx):
-    await ctx.send('Pong')
-
-
 # @client.event
 # async def on_message(message):
 #     msg = message.content
@@ -93,7 +87,8 @@ async def dado(ctx, *dados):
                 try:
                     plus_value = int(_dados[plus_location + 1:])
                     final_value = random.randint(1, int(_dados[dice_location + 1:plus_location])) + plus_value
-                    await ctx.channel.send(f'{username} {_dados} --> {final_value}')
+                    summation = '[' + str(final_value) + str(_dados[:plus_location]) + ']'
+                    await ctx.channel.send(f'{username} {_dados} {summation} --> {final_value}')
                 except ValueError:
                     await ctx.channel.send(f'{username} Dado não idêntificado!')
             elif dice_location == 0:
