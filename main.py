@@ -31,7 +31,13 @@ async def on_ready():
 #     if message.author == client.user:
 #         return
 
-
+@client.command(name = "segredo")
+async def secret(ctx):
+    try:
+        await ctx.author.send("Não conta para ninguém...")
+        await ctx.author.send("Sabia que o cérebro é o único orgão que escolheu o seu próprio nome ???")
+    except discord.errors.Forbidden as errors:
+        await ctx.send("Não posso te contar 😥 ( Habilite receber mensagens de membros do servidor Opções > Privacidade )")
 # ===================== Comandos de Help ===============================================================
 
 client.remove_command("help")
