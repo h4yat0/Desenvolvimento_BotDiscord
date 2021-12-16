@@ -45,14 +45,14 @@ async def send_help(ctx):
 @client.command(name = "help")
 async def get_help(ctx):
     url_image= "https://raw.githubusercontent.com/h4yat0/Desenvolvimento_BotDiscord/deploy-heroku-1/Assets/img/logo.png"
-    embed_image = discord.Embed(
+    embed_help = discord.Embed(
         title = ":books:  Lista de Comandos :books:",
         description = "Ps: Para saber mais de um comando digite o nome dele Exemplo: .help <Comando> ",
         color = 0x0000FF)
-    embed_image.set_author(name=client.user.name, icon_url=client.user.avatar_url)
-    embed_image.set_footer(text="Feito por " + client.user.name, icon_url=client.user.avatar_url)
-    embed_image.add_field(name="🐲COMANDOS RPG🧙‍♂️", inline =True, value=
-    """⋙ .dado + (d2, d4, d6, d8, d10, d12, d20) + (+Soma[Opicional])
+    embed_help.set_author(name=client.user.name, icon_url=client.user.avatar_url)
+    embed_help.set_footer(text="Feito por " + client.user.name, icon_url=client.user.avatar_url)
+    embed_help.add_field(name="🐲COMANDOS RPG🧙‍♂️", inline =False, value=
+                        """⋙ .dado + (d2, d4, d6, d8, d10, d12, d20 +Soma[Opicional])
                           ⋙ .classe + (Nome das Classes abaixo)
                           → Alquimista
                           → Antipaladino
@@ -70,29 +70,14 @@ async def get_help(ctx):
                           → Ranger
                           → Xamã"""
                           )
-    embed_image.add_field(name="🐲COMANDOS RPG🧙‍♂️", inline =True, value=
-    """⋙ .dado + (d2, d4, d6, d8, d10, d12, d20) + (+Soma[Opicional])
-                          ⋙ .classe + (Nome das Classes abaixo)
-                          → Alquimista
-                          → Antipaladino
-                          → Bárbaro 
-                          → Bardo
-                          → Cavaleiro
-                          → Clérigo
-                          → Feiticeiro
-                          → Druida
-                          → Guerreiro
-                          → Ladino
-                          → Mago
-                          → Monge
-                          → Paladino
-                          → Ranger
-                          → Xamã"""
-                          )                          
+    embed_help.add_field(name="💎OUTROS COMANDOS💎", inline =False, value=
+                        """ ⋙ .image
+                        ⋙ .video"""
+    )                          
    
-    embed_image.add_field(name="Parâmetros", value="{largura}/{altura}")
-    embed_image.set_image(url=url_image)
-    await ctx.send(embed=embed_image)
+   
+    embed_help.set_image(url=url_image)
+    await ctx.send(embed=embed_help)
 
     # frame_embed = discord.Embed(
     #     title=":books:  Lista de Comandos :books:",
