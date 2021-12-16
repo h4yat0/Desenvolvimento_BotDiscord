@@ -41,44 +41,59 @@ client.remove_command("help")
 @client.command(name="help")
 async def send_help(ctx):
     await ctx.channel.send("teste")
-    frame_embed = discord.Embed(
-        title=":books:  Lista de Comandos :books:",
-        description="Segue abaixo todos os comandos e suas variações !",
-        color=0xDC143C
-    )
-    frame_embed.set_author(name=client.user.name, icon_url=client.user.avatar_url)
-    frame_embed.set_footer(text=client.user.name, icon_url=client.user.avatar_url)
 
-    frame_embed.set_image(url="https://raw.githubusercontent.com/h4yat0/Desenvolvimento_BotDiscord/deploy-heroku-1/Assets/img/logo.png")
+@client.command(name = "foto")
+async def get_random_image(ctx):
+    url_image= "https://random.imagecdn.app/500/150"
+    embed_image = discord.Embed(
+        title = "Resultado da busca de imagem",
+        description = "Ps: A imagem é aleatória",
+        color = 0x0000FF)
+    embed_image.set_author(name=client.user.name, icon_url=client.user.avatar_url)
+    embed_image.set_footer(text="Feito por " + client.user.name, icon_url=client.user.avatar_url)
+    embed_image.add_field(name="API", value="Foi usado a Api: https://picsum.photos/1920/1080")
+    embed_image.add_field(name="Parâmetros", value="{largura}/{altura}")
+    embed_image.set_image(url=url_image)
+    await ctx.send(embed=embed_image)
 
-    frame_embed.add_field(name="")
-    frame_embed.add_field(name="🐲COMANDOS RPG🧙‍♂️", inline=False, value="""            
-                          ⋙ .dado + (d2, d4, d6, d8, d10, d12, d20) + (+valor para somar [Opicional])
-                          ⋙ .classe + (Nome das Classes abaixo)
-                          → Alquimista
-                          → Antipaladino
-                          → Bárbaro 
-                          → Bardo
-                          → Cavaleiro
-                          → Clérigo
-                          → Feiticeiro
-                          → Druida
-                          → Guerreiro
-                          → Ladino
-                          → Mago
-                          → Monge
-                          → Paladino
-                          → Ranger
-                          → Xamã"""
-                          )
+    # frame_embed = discord.Embed(
+    #     title=":books:  Lista de Comandos :books:",
+    #     description="Segue abaixo todos os comandos e suas variações !",
+    #     color=0xDC143C
+    # )
+    # frame_embed.set_author(name=client.user.name, icon_url=client.user.avatar_url)
+    # frame_embed.set_footer(text=client.user.name, icon_url=client.user.avatar_url)
 
-    frame_embed.add_field(name="💎OUTROS COMANDOS💎", inline=False, value="""            
-                          ⋙ .image
-                          ⋙ .video"""
-                          )
+    # frame_embed.set_image(url="https://raw.githubusercontent.com/h4yat0/Desenvolvimento_BotDiscord/deploy-heroku-1/Assets/img/logo.png")
+
+    # frame_embed.add_field(name="")
+    # frame_embed.add_field(name="🐲COMANDOS RPG🧙‍♂️", inline=False, value="""            
+    #                       ⋙ .dado + (d2, d4, d6, d8, d10, d12, d20) + (+valor para somar [Opicional])
+    #                       ⋙ .classe + (Nome das Classes abaixo)
+    #                       → Alquimista
+    #                       → Antipaladino
+    #                       → Bárbaro 
+    #                       → Bardo
+    #                       → Cavaleiro
+    #                       → Clérigo
+    #                       → Feiticeiro
+    #                       → Druida
+    #                       → Guerreiro
+    #                       → Ladino
+    #                       → Mago
+    #                       → Monge
+    #                       → Paladino
+    #                       → Ranger
+    #                       → Xamã"""
+    #                       )
+
+    # frame_embed.add_field(name="💎OUTROS COMANDOS💎", inline=False, value="""            
+    #                       ⋙ .image
+    #                       ⋙ .video"""
+    #                       )
 
 
-    await ctx.channel.send(frame_embed)
+    # await ctx.channel.send(frame_embed)
 
 
     # await ctx.channel.send(f':books:  Lista de Comandos :books:  \n\n')
