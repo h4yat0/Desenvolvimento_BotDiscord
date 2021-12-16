@@ -40,7 +40,8 @@ async def on_ready():
 
 # ===================== Comandos de Help ===============================================================
 
-@client.command(name="helpe")
+client.remove_command("help")
+@client.command(name="help")
 async def send_help(ctx):
     await ctx.channel.send(f':books:  Lista de Comandos :books:  \n\n')
     await ctx.channel.send(f'‎')
