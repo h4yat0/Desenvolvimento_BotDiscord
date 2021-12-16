@@ -10,26 +10,22 @@ from discord.ext import commands  # , tasks
 # import json
 # import aiohttp
 
-# # -> Conexão com banco de dados
-# conexao_banco_de_dados = psycopg2.connect(
-#     host=environ.get('DB_HOST'),
-#     dbname=environ.get('DB_NAME'),
-#     user=environ.get('DB_USER'),
-#     password=environ.get('DB_PASSWORD'))
-#
-# cur = conexao_banco_de_dados.cursor()
-# cur.execute("SELECT * FROM players;")
-# print(cur.fetchall())
-# conexao_banco_de_dados.commit()
-# cur.close()
+# -> Conexão com banco de dados
+conexao_banco_de_dados = psycopg2.connect(
+    host=environ.get('DB_HOST'),
+    dbname=environ.get('DB_NAME'),
+    user=environ.get('DB_USER'),
+    password=environ.get('DB_PASSWORD'))
+cur = conexao_banco_de_dados.cursor()
+
 
 # -> Prefixo Definido
 client = commands.Bot(command_prefix='.')
 
-
 @client.event
 async def on_ready():
     print('Estou logado como {0.user}'.format(client))
+
 
 # @client.event
 # async def on_message(message):
@@ -85,7 +81,7 @@ async def dado(ctx, *dados):
                 try:
                     plus_value = int(_dados[plus_location + 1:])
                     final_value = random.randint(1, int(_dados[dice_location + 1:plus_location])) + plus_value
-                    summation = '[' + str(final_value-plus_value) + '+' + str(plus_value) + ']'
+                    summation = '[' + str(final_value - plus_value) + '+' + str(plus_value) + ']'
                     await ctx.channel.send(f'{username} {_dados} {summation} → {final_value}')
                 except ValueError:
                     await ctx.channel.send(f'{username} Dado não idêntificado!')
@@ -122,6 +118,20 @@ async def classes(ctx):
         '\nMonge\nPaladino')
 
 
+# ===================== Comandos EXP ===============================================================
+@client.command()
+async def ganhoEXP(ctx):
+    username = ctx.message.author.mention
+    cur.execute("UPDATE players SET experiencia = 100 WHERE  nome = 'Hayato';")
+    conexao_banco_de_dados.commit()
+    await ctx.channel.send(f'{username} o XP de Hayato foi definido para 100')
+
+@client.command()
+async def zerarEXP(ctx):
+    username = ctx.message.author.mention
+    cur.execute("UPDATE players SET experiencia = 0 WHERE  nome = 'Hayato';")
+    conexao_banco_de_dados.commit()
+    await ctx.channel.send(f'{username} o XP de Hayato foi definido para 0')
 # ===================== Comandos de imagem ou vídeo ====================================================
 
 @client.command()
