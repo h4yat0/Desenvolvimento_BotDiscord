@@ -38,20 +38,23 @@ async def on_ready():
 
 client.remove_command("help")
 
-@client.command(name="help")
+@client.command(name="ajuda")
 async def send_help(ctx):
     await ctx.channel.send("teste")
 
-@client.command(name = "foto")
-async def get_random_image(ctx):
-    url_image= "https://random.imagecdn.app/500/150"
+@client.command(name = "help")
+async def get_help(ctx):
+    url_image= "https://raw.githubusercontent.com/h4yat0/Desenvolvimento_BotDiscord/deploy-heroku-1/Assets/img/logo.png"
     embed_image = discord.Embed(
-        title = "Resultado da busca de imagem",
-        description = "Ps: A imagem é aleatória",
+        title = ":books:  Lista de Comandos :books:",
+        description = "Ps: Para saber mais de um comando digite o nome dele Exemplo: .help <Comando> ",
         color = 0x0000FF)
     embed_image.set_author(name=client.user.name, icon_url=client.user.avatar_url)
     embed_image.set_footer(text="Feito por " + client.user.name, icon_url=client.user.avatar_url)
-    embed_image.add_field(name="API", value="Foi usado a Api: https://picsum.photos/1920/1080")
+    embed_image.add_field(name="🐲COMANDOS RPG🧙‍♂️", value="xxx \n xxx")
+    embed_image.add_field(name="🐲COMANDOS RPG🧙‍♂️", value="""xxx 
+     xxx
+     xxx""")
     embed_image.add_field(name="Parâmetros", value="{largura}/{altura}")
     embed_image.set_image(url=url_image)
     await ctx.send(embed=embed_image)
