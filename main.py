@@ -52,23 +52,23 @@ async def get_help(ctx):
     embed_image.set_author(name=client.user.name, icon_url=client.user.avatar_url)
     embed_image.set_footer(text="Feito por " + client.user.name, icon_url=client.user.avatar_url)
     embed_image.add_field(name="🐲COMANDOS RPG🧙‍♂️", inline =False, value=
-    """⋙ .dado + (d2, d4, d6, d8, d10, d12, d20) + (+valor para somar [Opicional])
+    """⋙ .dado + (d2, d4, d6, d8, d10, d12, d20) + (+Soma[Opicional])
                           ⋙ .classe + (Nome das Classes abaixo)
-                          → Alquimista
-                          → Antipaladino
-                          → Bárbaro 
-                          → Bardo
-                          → Cavaleiro
-                          → Clérigo
-                          → Feiticeiro
-                          → Druida
-                          → Guerreiro
-                          → Ladino
-                          → Mago
-                          → Monge
-                          → Paladino
-                          → Ranger
-                          → Xamã"""
+                           ‎→ Alquimista
+                           ‎→ Antipaladino
+                           ‎→ Bárbaro 
+                           ‎→ Bardo
+                           ‎→ Cavaleiro
+                           ‎→ Clérigo
+                           ‎→ Feiticeiro
+                           ‎→ Druida
+                           ‎→ Guerreiro
+                           ‎→ Ladino
+                           ‎→ Mago
+                           ‎→ Monge
+                           ‎→ Paladino
+                           ‎→ Ranger
+                           ‎→ Xamã"""
                           )
    
     embed_image.add_field(name="Parâmetros", value="{largura}/{altura}")
