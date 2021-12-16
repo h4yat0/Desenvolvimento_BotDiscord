@@ -47,7 +47,7 @@ async def send_help(ctx):
     frame_embed.set_author(name = client.user.name, icon_url=client.user.avatar_url)
     frame_embed.set_footer(text = client.user.name, icon_url=client.user.avatar_url)
     
-    frame_embed.set_imaget("")
+    frame_embed.set_image("https://raw.githubusercontent.com/h4yat0/Desenvolvimento_BotDiscord/deploy-heroku-1/Assets/img/logo.png")
 
     frame_embed.add_field(name = "")
     frame_embed.add_field(name = "🐲COMANDOS RPG🧙‍♂️", inline = False, value = """            
@@ -74,7 +74,6 @@ async def send_help(ctx):
                           ⋙ .image
                           ⋙ .video"""
     )
-
 
     await ctx.channel.send(embed = frame_embed)
 
