@@ -45,26 +45,12 @@ async def ping(ctx):
 
 
 # ===================== Comandos de Help ===============================================================
-<<<<<<< Updated upstream
 
-@client.command(aliases=['helpe'])
-async def helpme(ctx):
-    await ctx.channel.send(':bookmark_tabs: Veja os comandos abaixo \n\n')
-    await ctx.channel.send('‎‎')
-    await ctx.channel.send('.dado + (d2, d4, d6, d8, d10, d12, d20)\n'
-                           '.video\n'
-                           '.image\n'
-                           '.classes\n'
-                           '    ')
-
-
-=======
-    
-@bot.command(name = "help")
+@client.command(name="helpe")
 async def send_help(ctx):
     await ctx.channel.send(f':books:  Lista de Comandos :books:  \n\n')
     await ctx.channel.send(f'‎‎')
-    
+
     await ctx.channel.send(f'COMANDOS RPG')
     await ctx.channel.send(f'‎')
     await ctx.channel.send(f'⋙ .dado + (d2, d4, d6, d8, d10, d12, d20)')
@@ -84,13 +70,14 @@ async def send_help(ctx):
                             → Monge,
                             → Paladino,
                             → Ranger e
-                            → Xamã''')      
+                            → Xamã''')
     await ctx.channel.send(f'‎')
     await ctx.channel.send(f'💎OUTROS COMANDOS💎')
     await ctx.channel.send(f'‎')
     await ctx.channel.send(f'⋙ .image')
     await ctx.channel.send(f'⋙ .video')
->>>>>>> Stashed changes
+
+
 # ===================== Comandos de Dado ===============================================================
 
 @client.command()
@@ -110,7 +97,7 @@ async def dado(ctx, *dados):
                 except ValueError:
                     await ctx.channel.send(f'{username} Dado não idêntificado!')
             elif dice_location == 0:
-                final_value = random.randint(1, int(_dados[dice_location + 1:]))
+                final_value = random.randint(1, int(_dados[dice_location + 1:plus_location]))
                 await ctx.channel.send(f'{username} {_dados} --> {final_value}')
             if _dados[0].isnumeric() and _dados[0] != 0:
                 summation = '['
@@ -123,7 +110,7 @@ async def dado(ctx, *dados):
                         if plus_location > dice_location and plus_location != -1:
                             plus_value = int(_dados[plus_location + 1:])
                             summation + str(plus_value) + '+'
-                    await ctx.channel.send(f'{username} {_dados} {summation[:-1]}] --> {final_value+plus_value}')
+                    await ctx.channel.send(f'{username} {_dados} {summation[:-1]}] --> {final_value + plus_value}')
                 except ValueError:
                     await ctx.channel.send(f'{username} Dado não idêntificado!')
         else:
