@@ -99,12 +99,15 @@ async def dado(ctx, *dados):
                 try:
                     number_of_repetitions = int(_dados[:dice_location])
                     for i in range(number_of_repetitions):
-                        roll = random.randint(1, int(_dados[dice_location + 1:plus_location]))
+                        if plus_location > dice_location:
+                            roll = random.randint(1, int(_dados[dice_location + 1:plus_location]))
+                        else:
+                            roll = random.randint(1, int(_dados[dice_location + 1:]))
                         final_value += roll
                         summation = summation + str(roll) + '+'
-                        if plus_location > dice_location and plus_location != -1:
-                            plus_value = int(_dados[plus_location + 1:])
-                            summation + str(plus_value) + '+'
+                    if plus_location > dice_location and plus_location != -1:
+                        plus_value = int(_dados[plus_location + 1:])
+                        summation + str(plus_value) + '+'
                     await ctx.channel.send(f'{username} {_dados} {summation[:-1]}] → {final_value + plus_value}')
                 except ValueError:
                     await ctx.channel.send(f'{username} Dado não idêntificado!')
