@@ -63,20 +63,35 @@ async def helpme(ctx):
 async def dado(ctx, *dados):
     username = ctx.message.author.mention
     for _dados in dados:
+        final_value = 0
+        plus_value = 0
         dice_location = _dados.find('d')
+        plus_location = _dados.find('+')
         if dice_location != -1:
-            if dice_location == 0:
-                await ctx.channel.send(f'{username} {_dados} --> {random.randint(1, int(_dados[dice_location + 1:]))}')
+            if dice_location == 0 and plus_location > dice_location and plus_location != -1:
+                try:
+                    plus_value = int(_dados[plus_location + 1:])
+                    final_value = random.randint(1, int(_dados[dice_location + 1:plus_location])) + plus_value
+                    await ctx.channel.send(f'{username} {_dados} --> {final_value}')
+                except ValueError:
+                    await ctx.channel.send(f'{username} Dado não idêntificado!')
+            elif dice_location == 0:
+                final_value = random.randint(1, int(_dados[dice_location + 1:]))
+                await ctx.channel.send(f'{username} {_dados} --> {final_value}')
             if _dados[0].isnumeric() and _dados[0] != 0:
-                number_of_repetitions = int(_dados[:dice_location])
-                final_value = 0
                 summation = '['
-
-                for i in range(number_of_repetitions):
-                    roll = random.randint(1, int(_dados[dice_location + 1:]))
-                    final_value += roll
-                    summation = summation + str(roll) + '+'
-                await ctx.channel.send(f'{username} {_dados} {summation[:-1]}] --> {final_value}')
+                try:
+                    number_of_repetitions = int(_dados[:dice_location])
+                    for i in range(number_of_repetitions):
+                        roll = random.randint(1, int(_dados[dice_location + 1:]))
+                        final_value += roll
+                        summation = summation + str(roll) + '+'
+                        if plus_location > dice_location and plus_location != -1:
+                            plus_value = int(_dados[plus_location + 1:])
+                            summation + str(plus_value) + '+'
+                    await ctx.channel.send(f'{username} {_dados} {summation[:-1]}] --> {final_value+plus_value}')
+                except ValueError:
+                    await ctx.channel.send(f'{username} Dado não idêntificado!')
         else:
             await ctx.channel.send(f'{username} Dado não idêntificado!')
 
