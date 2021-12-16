@@ -45,6 +45,7 @@ async def ping(ctx):
 
 
 # ===================== Comandos de Help ===============================================================
+<<<<<<< Updated upstream
 
 @client.command(aliases=['helpe'])
 async def helpme(ctx):
@@ -57,6 +58,39 @@ async def helpme(ctx):
                            '    ')
 
 
+=======
+    
+@bot.command(name = "help")
+async def send_help(ctx):
+    await ctx.channel.send(f':books:  Lista de Comandos :books:  \n\n')
+    await ctx.channel.send(f'‎‎')
+    
+    await ctx.channel.send(f'COMANDOS RPG')
+    await ctx.channel.send(f'‎')
+    await ctx.channel.send(f'⋙ .dado + (d2, d4, d6, d8, d10, d12, d20)')
+
+    await ctx.channel.send(f'''⋙ .classe + (Nome da Classe) 
+                            → Alquimista,
+                            → Antipaladino, 
+                            → Bárbaro, 
+                            → Bardo, 
+                            → Cavaleiro,
+                            → Clérigo,
+                            → Druida,
+                            → Feiticeiro,
+                            → Guerreiro,
+                            → Ladino,
+                            → Mago,
+                            → Monge,
+                            → Paladino,
+                            → Ranger e
+                            → Xamã''')      
+    await ctx.channel.send(f'‎')
+    await ctx.channel.send(f'💎OUTROS COMANDOS💎')
+    await ctx.channel.send(f'‎')
+    await ctx.channel.send(f'⋙ .image')
+    await ctx.channel.send(f'⋙ .video')
+>>>>>>> Stashed changes
 # ===================== Comandos de Dado ===============================================================
 
 @client.command()
