@@ -3,7 +3,7 @@ from os import environ
 import discord
 import psycopg2
 from discord import message
-from discord.ext import commands, embed  # , tasks
+from discord.ext import commands  # , tasks
 
 # import requests
 # import datetime
@@ -18,9 +18,9 @@ conexao_banco_de_dados = psycopg2.connect(
     password=environ.get('DB_PASSWORD'))
 cur = conexao_banco_de_dados.cursor()
 
-
 # -> Prefixo Definido
 client = commands.Bot(command_prefix='.')
+
 
 @client.event
 async def on_ready():
@@ -37,20 +37,22 @@ async def on_ready():
 # ===================== Comandos de Help ===============================================================
 
 client.remove_command("help")
+
+
 @client.command(name="help")
 async def send_help(ctx):
     frame_embed = discord.Embed(
-        title = ":books:  Lista de Comandos :books:",
-        description = "Segue abaixo todos os comandos e suas variações !", 
-        color = 0xDC143C
+        title=":books:  Lista de Comandos :books:",
+        description="Segue abaixo todos os comandos e suas variações !",
+        color=0xDC143C
     )
-    frame_embed.set_author(name = client.user.name, icon_url=client.user.avatar_url)
-    frame_embed.set_footer(text = client.user.name, icon_url=client.user.avatar_url)
-    
-    frame_embed.set_image("https://raw.githubusercontent.com/h4yat0/Desenvolvimento_BotDiscord/deploy-heroku-1/Assets/img/logo.png")
+    frame_embed.set_author(name=client.user.name, icon_url=client.user.avatar_url)
+    frame_embed.set_footer(text=client.user.name, icon_url=client.user.avatar_url)
 
-    frame_embed.add_field(name = "")
-    frame_embed.add_field(name = "🐲COMANDOS RPG🧙‍♂️", inline = False, value = """            
+    frame_embed.set_image(url="https://raw.githubusercontent.com/h4yat0/Desenvolvimento_BotDiscord/deploy-heroku-1/Assets/img/logo.png")
+
+    frame_embed.add_field(name="")
+    frame_embed.add_field(name="🐲COMANDOS RPG🧙‍♂️", inline=False, value="""            
                           ⋙ .dado + (d2, d4, d6, d8, d10, d12, d20) + (+valor para somar [Opicional])
                           ⋙ .classe + (Nome das Classes abaixo)
                           → Alquimista
@@ -68,14 +70,14 @@ async def send_help(ctx):
                           → Paladino
                           → Ranger
                           → Xamã"""
-    )
+                          )
 
-    frame_embed.add_field(name = "💎OUTROS COMANDOS💎", inline = False, value = """            
+    frame_embed.add_field(name="💎OUTROS COMANDOS💎", inline=False, value="""            
                           ⋙ .image
                           ⋙ .video"""
-    )
+                          )
 
-    await ctx.channel.send(embed = frame_embed)
+    await ctx.channel.send(embed=frame_embed)
 
     # await ctx.channel.send(f':books:  Lista de Comandos :books:  \n\n')
     # await ctx.channel.send(f'')
@@ -164,12 +166,15 @@ async def ganhoEXP(ctx):
     conexao_banco_de_dados.commit()
     await ctx.channel.send(f'{username} o XP de Hayato foi definido para 100')
 
+
 @client.command()
 async def zerarEXP(ctx):
     username = ctx.message.author.mention
     cur.execute("UPDATE players SET experiencia = 0 WHERE  nome = 'Hayato';")
     conexao_banco_de_dados.commit()
     await ctx.channel.send(f'{username} o XP de Hayato foi definido para 0')
+
+
 # ===================== Comandos de imagem ou vídeo ====================================================
 
 @client.command()
